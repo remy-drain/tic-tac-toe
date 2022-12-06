@@ -1,3 +1,3 @@
-const gameBoard = (() {
-    
+const gameBoard = (() => {
+
 })();
