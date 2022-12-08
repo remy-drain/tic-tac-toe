@@ -1,18 +1,20 @@
-const game = (function()  {
-    const players = [];
-    const board = [];
+const game = (function() {
 
-    //cache DOM
+    const players = {
+        players: [],
+        init: function() {
+            this.cacheDom();
+            this.bindEvents();
+        },
+        cacheDom: function() {
+            document.querySelector
+        },
+        bindEvents: function() {
 
-    //bind events
+        },
+        addPlayers: function() {
 
-    //objects
-    const player = function(name, mark) {
-        this.name = name;
-        this.mark = mark;
+        }
     }
+    players.init();
 })();
-
-/* 
-
-*/

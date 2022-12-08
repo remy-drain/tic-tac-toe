@@ -37,33 +37,6 @@ body {
   z-index: 99;
 }
 
-.players input {
-    border: none;
-    width: calc(var(--cell-size) * 4.5);
-    outline: none;
-    background-color: transparent;
-    font-size: 5rem;
-    color: var(--bg-color);
-}
-
-.players button {
-    font-size: 3rem;
-    background-color: var(--bg-color);
-    border: 1px solid var(--mark-color);
-    padding: .25em .5em;
-    cursor: pointer;
-}
-
-.players button:hover {
-  background-color: var(--mark-color);
-  color: var(--bg-color);
-  border-color: var(--bg-color);
-}
-
-.players.hide {
-  display: none;
-}
-
 .board {
     width: 100vw;
     height: 100vh;
@@ -165,7 +138,8 @@ body {
     background-color: var(--bg-color);
 }
 
-.results-message {
+.results-message
+.players {
     display: none;
   position: fixed;
   top: 0;
@@ -180,7 +154,17 @@ body {
   flex-direction: column;
 }
 
-.results-message button {
+.players input {
+    border: none;
+    width: calc(var(--cell-size) * 4.5);
+    outline: none;
+    background-color: transparent;
+    font-size: 5rem;
+    color: var(--bg-color);
+}
+
+.results-message button,
+.players button {
     font-size: 3rem;
     background-color: var(--bg-color);
     border: 1px solid var(--mark-color);
@@ -188,12 +172,14 @@ body {
     cursor: pointer;
 }
 
-.results-message button:hover {
+.results-message button:hover,
+.players button:hover    {
   background-color: var(--mark-color);
   color: var(--bg-color);
   border-color: var(--bg-color);
 }
 
-.results-message.show {
+.results-message.show,
+.players.show {
   display: flex;
 }
