@@ -6,3 +6,6 @@ const game = (function()  {
     //bind events
 })();
 
+/* 
+
+*/
