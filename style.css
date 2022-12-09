@@ -6,7 +6,7 @@
 
 :root {
     /* sizing */
-    --cell-size: 100px;
+    --cell-size: 25vw;
     --mark-size: calc(var(--cell-size) * .9);
 
     /* color */
@@ -19,22 +19,6 @@
 body {
     margin: 0;
     background-color: var(--bg-color);
-}
-
-.players {
-    display: flex;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, .9);
-  justify-content: center;
-  align-items: center;
-  color: var(--bg-color);
-  font-size: 5rem;
-  flex-direction: column;
-  z-index: 99;
 }
 
 .board {
@@ -138,7 +122,7 @@ body {
     background-color: var(--bg-color);
 }
 
-.results-message
+.results-message,
 .players {
     display: none;
   position: fixed;

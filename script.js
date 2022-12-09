@@ -1,20 +1,15 @@
 const game = (function() {
-
-    const players = {
-        players: [],
-        init: function() {
-            this.cacheDom();
-            this.bindEvents();
-        },
-        cacheDom: function() {
-            document.querySelector
-        },
-        bindEvents: function() {
-
-        },
-        addPlayers: function() {
-
-        }
+    const _cacheDom = function() {
+        console.log(this);
     }
-    players.init();
+    return _cacheDom();
 })();
+
+/*
+event listener for let's play button
+read names from input
+add to array with mark (player, mark)
+- using factory function?
+push player names and marks to DOM
+
+*/
