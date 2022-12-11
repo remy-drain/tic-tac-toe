@@ -11,14 +11,37 @@ const game = (function() {
 
     //bind events
     cells.forEach((cell) => cell.addEventListener("click", addMark));
+    letsPlay.addEventListener("click", getPlayers);
+
+    function getPlayers(e) {
+        e.preventDefault();
+        playersInput.forEach((player) => addPlayers(player, player.value));
+    }
+
+    function addPlayers(e, value) {
+        const player = {
+            name: value,
+            mark: e.getAttribute("id")
+        }
+        players.push(player);
+        hideNode(e.parentNode.parentNode);
+    }
+
+    function hideNode(node) {
+        node.classList.remove("show");
+    }
 
     function addMark(e) {
+        const selection = e.target;
+        if (selection.classList.contains("x") || selection.classList.contains("oh")) {
+            return;
+        }
         let cell = {
-            dataCell: e.target.getAttribute("data-cell"),
+            dataCell: selection.getAttribute("data-cell"),
             playerMark: gameBoard.getAttribute("class")
         }
         board.push(cell);
-        e.target.setAttribute("class", cell.playerMark)
+        selection.classList.add(cell.playerMark);
         switchPlayer();
     }
 

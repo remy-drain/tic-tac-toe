@@ -1,6 +1,8 @@
 *,
 *::after,
 *::before {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
@@ -126,6 +128,7 @@ body {
 .players {
     display: none;
   position: fixed;
+  gap: 1.5rem;
   top: 0;
   left: 0;
   right: 0;
@@ -134,17 +137,24 @@ body {
   justify-content: center;
   align-items: center;
   color: var(--bg-color);
-  font-size: 5rem;
+  font-size: calc(var(--cell-size) * .25);
   flex-direction: column;
+  z-index: 99;
+}
+
+.players label {
+    font-size: inherit;
+    width: 50%;
 }
 
 .players input {
     border: none;
-    width: calc(var(--cell-size) * 4.5);
     outline: none;
     background-color: transparent;
-    font-size: 5rem;
     color: var(--bg-color);
+    line-height: inherit;
+    font-size: inherit;
+    width: 60%;
 }
 
 .results-message button,
@@ -166,4 +176,5 @@ body {
 .results-message.show,
 .players.show {
   display: flex;
+
 }
