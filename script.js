@@ -18,6 +18,15 @@ const game = (function() {
             playerMark: gameBoard.getAttribute("class")
         }
         board.push(cell);
-        console.log(board);
+        e.target.setAttribute("class", cell.playerMark)
+        switchPlayer();
+    }
+
+    function switchPlayer() {
+        if (gameBoard.getAttribute("class") === "x") {
+            gameBoard.setAttribute("class", "oh");
+        } else {
+            gameBoard.setAttribute("class", "x");
+        }
     }
 })();
