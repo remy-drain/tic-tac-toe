@@ -1,15 +1,23 @@
 const game = (function() {
-    const _cacheDom = function() {
-        console.log(this);
+    const players = [];
+    const board = [];
+
+    //cache DOM
+    const page = document.querySelector("body");
+    const playersInput = page.querySelectorAll("input");
+    const letsPlay = page.querySelector("button#play");
+    const gameBoard = page.querySelector("#board");
+    const cells = gameBoard.querySelectorAll(".cell");
+
+    //bind events
+    cells.forEach((cell) => cell.addEventListener("click", addMark));
+
+    function addMark(e) {
+        let cell = {
+            dataCell: e.target.getAttribute("data-cell"),
+            playerMark: gameBoard.getAttribute("class")
+        }
+        board.push(cell);
+        console.log(board);
     }
-    return _cacheDom();
 })();
-
-/*
-event listener for let's play button
-read names from input
-add to array with mark (player, mark)
-- using factory function?
-push player names and marks to DOM
-
-*/
