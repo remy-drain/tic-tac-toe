@@ -23,6 +23,45 @@ body {
     background-color: var(--bg-color);
 }
 
+#player-names {
+    visibility: hidden;
+    padding-top: 3rem;
+    margin: 0 auto;
+    display: grid;
+    grid-template-areas: 
+    "xMark oMark"
+    "xPlayer oPlayer";
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+    width: calc(var(--cell-size) * 1.1);
+    grid-template-columns: 1fr 1fr;
+}
+
+#player-names .turn {
+    background-color: var(--mark-color);
+    color: var(--bg-color);
+}
+
+h1.player-x {
+    grid-area: xMark;
+    padding: .3em;
+}
+
+h1.player-oh {
+    grid-area: oMark;
+    padding: .3em;
+}
+
+h2.player-x {
+    grid-area: xPlayer;
+}
+
+h2.player-oh {
+    grid-area: oPlayer;
+}
+
 #board {
     width: 100vw;
     height: 100vh;
@@ -177,4 +216,8 @@ body {
 .players.show {
   display: flex;
 
+}
+
+#player-names.show {
+    visibility: visible;
 }

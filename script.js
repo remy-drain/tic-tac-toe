@@ -10,8 +10,8 @@ const game = (function() {
     const cells = gameBoard.querySelectorAll(".cell");
 
     //bind events
-    cells.forEach((cell) => cell.addEventListener("click", addMark));
     letsPlay.addEventListener("click", getPlayers);
+    cells.forEach((cell) => cell.addEventListener("click", addMark));
 
     function getPlayers(e) {
         e.preventDefault();
