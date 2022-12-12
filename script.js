@@ -1,20 +1,4 @@
-const game = (function() {
-    const players = [];
-    const board = {
-        x: [],
-        oh: []
-    };
-    const winningArrays = [
-        [0, 1, 2],
-        [3, 4, 5],
-        [6, 7, 8],
-        [0, 3, 6],
-        [1, 4, 7],
-        [2, 5, 8],
-        [0, 4, 8],
-        [2, 4, 6]
-    ];
-
+(function() {
     //cache DOM
     const page = document.querySelector("body");
     const playersInput = page.querySelectorAll("input");
@@ -24,86 +8,136 @@ const game = (function() {
     const playerXName = playerNames.querySelector("h2.player-x");
     const playerOhMark = playerNames.querySelector("h1.player-oh");
     const playerOhName = playerNames.querySelector("h2.player-oh");
-    const gameBoard = page.querySelector("#board");
-    const cells = gameBoard.querySelectorAll(".cell");
+    const board = page.querySelector("#board");
+    const cells = board.querySelectorAll(".cell");
 
-    //bind events
-    letsPlay.addEventListener("click", getPlayers);
-    cells.forEach((cell) => cell.addEventListener("click", addMark));
+    //modules
+    const gameBoard = {
+        marks: [],
 
-    function getPlayers(e) {
-        e.preventDefault();
-        playersInput.forEach((player) => addPlayers(player, player.value));
-    }
-
-    function addPlayers(e, value) {
-        const player = {
-            name: value,
-            mark: e.getAttribute("id"),
-            board: []
-        }
-        players.push(player);
-        hideNode(e.parentNode.parentNode);
-        showPlayers();
-    }
-
-    function showPlayers() {
-        playerNames.classList.add("show");
-        players.forEach((player) => {
-        if (player.mark === "player-x") {
-            playerXName.textContent = player.name;
-        } else {
-            playerOhName.textContent = player.name;
-        }
-    })
-    }
-
-    function hideNode(node) {
-        node.classList.remove("show");
-    }
-
-    function addMark(e) {
-        const selection = e.target;
-        if (selection.classList.contains("x") || selection.classList.contains("oh")) {
-            return;
-        }
-        let cell = {
-            dataCell: selection.getAttribute("data-cell"),
-            playerMark: gameBoard.getAttribute("class")
-        }
-        if (cell.playerMark === "x") {
-            board.x.push(cell.dataCell);
-        } else {
-            board.oh.push(cell.dataCell);
-        }
-        console.log(board);
-        selection.classList.add(cell.playerMark);
-        checkForWin(cell.playerMark);
-        switchPlayer();
-    }
-
-    function checkForWin(e) {
-        const markArray = board[e];
-        for (let arr of winningArrays) {
-            if (arr.every((val) => markArray.includes(val))) {
-                console.log("winner");
+        hideNode: function(node) {
+            node.classList.remove("show");
+        },
+        showPlayers: function(player) {
+            playerNames.classList.add("show");
+            if (player.mark === "player-x") {
+                playerXName.textContent = player.name;
             } else {
-                console.log("still reading fine");
+                playerOhName.textContent = player.name;
+            }
+        },
+        addMark: function(cell, mark) {
+            cell.classList.add(mark);
+        },
+        switchPlayers: function() {
+            playerXMark.classList.toggle("turn");
+            playerOhMark.classList.toggle("turn");
+        },
+        gameOver: function(result) {
+            console.log(result);
+        }
+    }
+
+    const players = {
+        players: [],
+        getPlayers: function(e) {
+            e.preventDefault();
+            playersInput.forEach(player => players.addPlayers(player, player.value));
+        },
+        addPlayers: function(mark, name) {
+            const player = {
+                name: name,
+                mark: mark.getAttribute("id")
+            }
+            players.players.push(player);
+            gameBoard.hideNode(mark.parentNode.parentNode);
+            players.players.forEach(player => gameBoard.showPlayers(player));
+        },
+        switchPlayer: function(mark) {
+            board.classList.remove(mark);
+            if (mark === "x") {
+                board.classList.add("oh");
+            } else {
+                board.classList.add("x");
+            }
+            gameBoard.switchPlayers();
+        }
+    }
+    
+    const game = {
+        board: [],
+        winningArrays: [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6]
+        ],
+        getMark: function(e) {
+            const selection = e.target;
+            if (selection.classList.contains("x") || selection.classList.contains("oh")) {
+                return;
+            }
+            let cell = {
+                dataCell: selection.getAttribute("data-cell"),
+                playerMark: board.getAttribute("class")
+            }
+            gameBoard.addMark(selection, cell.playerMark);
+            game.board.push(cell);
+            game.checkGameStatus(cell.playerMark);
+        },
+        checkGameStatus: function(mark) {
+            if (game.board.length < 5) {
+                players.switchPlayer(mark);
+            } else {
+                game.checkForWin(mark);
+            }
+        },
+        checkForWin: function(lastPlayed) {
+            let playerArray = game.board.filter(mark => mark.playerMark === lastPlayed);
+            let marks = [];
+
+            playerArray.forEach(play => marks.push(play.dataCell));
+
+            for (let arr of game.winningArrays) {
+                if (arr.every(val => marks.includes(val.toString()))) {
+                    gameBoard.gameOver(lastPlayed);
+                } else if (game.board.length === 9) {
+                    gameBoard.gameOver("draw");
+                } else {players.switchPlayer(lastPlayed);}
             }
         }
-        // compare to winning arrays
     }
-
-    function switchPlayer() {
-        if (gameBoard.getAttribute("class") === "x") {
-            gameBoard.setAttribute("class", "oh");
-            playerXMark.classList.remove("turn");
-            playerOhMark.classList.add("turn");
-        } else {
-            gameBoard.setAttribute("class", "x");
-            playerOhMark.classList.remove("turn");
-            playerXMark.classList.add("turn");
-        }
-    }
+        //bind events
+        letsPlay.addEventListener("click", players.getPlayers);
+        cells.forEach(cell => cell.addEventListener("click", game.getMark));
 })();
+// ------------------------------------------------------
+//     
+//     function checkForWin(e) {
+//         const markArray = board[e];
+//         const boardArray = board.x.concat(board.oh);
+//         for (let arr of winningArrays) {
+//             if (arr.every(val => markArray.includes(val.toString()))) {
+//                 declareWinner(e);
+//             } else if (boardArray.length === 9) {
+//                 gameDraw();
+//             } else {
+//                 switchPlayer();
+//             }
+//         }
+//     }
+
+//     function declareWinner(e) {
+//         console.log(e);
+//     }
+
+//     function switchPlayer() {
+//         
+//         }
+//     }
+// })();
 
