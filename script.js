@@ -99,6 +99,7 @@
         checkForWin: function(lastPlayed) {
             let playerArray = game.board.filter(mark => mark.playerMark === lastPlayed);
             let marks = [];
+            console.log(lastPlayed);
 
             playerArray.forEach(play => marks.push(play.dataCell));
 
