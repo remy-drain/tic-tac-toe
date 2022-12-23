@@ -23,8 +23,7 @@ body {
     background-color: var(--bg-color);
 }
 
-#player-names {
-    visibility: hidden;
+#players {
     padding-top: 3rem;
     margin: 0 auto;
     display: grid;
@@ -39,7 +38,7 @@ body {
     grid-template-columns: 1fr 1fr;
 }
 
-#player-names .turn {
+#players .turn {
     background-color: var(--mark-color);
     color: var(--bg-color);
 }
