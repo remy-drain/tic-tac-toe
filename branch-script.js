@@ -15,8 +15,6 @@
         } else {
             gameBoard.addMark(selection);
         }
-
-
        },
        addMark: function(e) {
         const mark = {
@@ -24,13 +22,17 @@
             player: board.getAttribute("class")
         }
         gameBoard.gameBoard.push(mark);
-        displayControl.showMark(e, mark.player);
+        displayControl.showMarks(e, mark.player);
+       },
+       switchPlayers: function() {
+
        }
     }
 
     const displayControl = {
-        showMark: function(cell, mark) {
+        showMarks: function(cell, mark) {
             cell.classList.add(mark);
+            gameBoard.switchPlayers();
         }
     }
 
