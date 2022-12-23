@@ -8,25 +8,32 @@
     const gameBoard = {
        gameBoard: [],
 
+       checkCell: function(e) {
+        let selection = e.target;
+        if (selection.classList.contains("x") || selection.classList.contains("oh")) {
+            return;
+        } else {
+            gameBoard.addMark(selection);
+        }
+
+
+       },
        addMark: function(e) {
-        let cell = e.target.getAttribute("data-cell");
-        let player = board.getAttribute("class");
-        
         const mark = {
-            cell: cell,
-            player: player
+            cell: e.getAttribute("data-cell"),
+            player: board.getAttribute("class")
         }
         gameBoard.gameBoard.push(mark);
-        displayControl.showMark(cell, player);
+        displayControl.showMark(e, mark.player);
        }
     }
 
     const displayControl = {
-        showMark: function(cell, player) {
-            
+        showMark: function(cell, mark) {
+            cell.classList.add(mark);
         }
     }
 
     //event listeners
-    cells.forEach(cell => cell.addEventListener("click", gameBoard.addMark));
+    cells.forEach(cell => cell.addEventListener("click", gameBoard.checkCell));
 })();
