@@ -1,8 +1,13 @@
-const gameBoard = {
-    gameBoard: [],
+(function() {
+    //cache DOM
+    
 
-}
+    const gameBoard = {
+       gameBoard: [],
 
-const displayControl = {
+    }
 
-}
+    const displayControl = {
+
+    }
+})();
