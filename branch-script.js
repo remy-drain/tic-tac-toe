@@ -24,6 +24,9 @@
         gameBoard.gameBoard.push(mark);
         displayControl.showMarks(e, mark.player);
        },
+       checkForWin: function() {
+        
+       },
        switchPlayers: function() {
 
        }
@@ -32,7 +35,7 @@
     const displayControl = {
         showMarks: function(cell, mark) {
             cell.classList.add(mark);
-            gameBoard.switchPlayers();
+            gameBoard.checkForWin();
         }
     }
 
