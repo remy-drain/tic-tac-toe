@@ -14,26 +14,37 @@
             return;
         } else {
             gameBoard.addMark(selection);
+            displayControl.showMarks(selection);
         }
        },
        addMark: function(e) {
         const mark = {
-            cell: e.getAttribute("data-cell"),
-            player: board.getAttribute("class")
+            [e.getAttribute("data-cell")]: board.getAttribute("class")
         }
-        gameBoard.gameBoard.push(mark);
-        displayControl.showMarks(e, mark.player);
+        this.gameBoard.push(mark);
        },
        checkForWin: function() {
-        
+        if (this.gameBoard.length < 5) {
+            this.switchPlayers();
+        } else {
+            this.gameBoard.filter();
+        }
        },
        switchPlayers: function() {
+        if (board.getAttribute("class") == "x") {
+            board.classList.remove("x");
+            board.classList.add("oh");
+        } else {
+            board.classList.remove("oh");
+            board.classList.add("x");
+        }
 
        }
     }
 
     const displayControl = {
-        showMarks: function(cell, mark) {
+        showMarks: function(cell) {
+            let mark = board.getAttribute("class");
             cell.classList.add(mark);
             gameBoard.checkForWin();
         }
