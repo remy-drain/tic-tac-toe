@@ -51,7 +51,8 @@ body {
     border-bottom: none;
 }
 
-#game.x .cell:not(.x):hover,
+#game.x .cell:not(.cell.x):hover,
 #game.x .cell:not(.oh):hover {
     background: url("images/x-mark.svg");
+    fill: rgb(var(--color), 0.7);
 }
