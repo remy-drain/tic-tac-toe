@@ -25,6 +25,23 @@ body {
     flex-direction: column;
 }
 
+#players {
+    display: flex;
+    flex-direction: row;
+    gap: 2em;
+    padding-bottom: 3em;
+    font-size: 2.4em;
+    align-items: center;
+}
+
+#game.x .player.x,
+#game.oh .player.oh {
+    background-color: rgb(var(--color));
+    color: rgb(var(--bg));
+    padding: .5em;
+    border-radius: 5px;
+}
+
 #board {
     width: 90%;
     aspect-ratio: 1 / 1;
@@ -49,4 +66,13 @@ body {
 
 .cell:nth-child(6) ~ .cell {
     border-bottom: none;
+}
+
+.cell.x {
+    background: url("images/x-mark.svg") center no-repeat;
+}
+
+.cell.oh {
+    background: url("images/o-mark.svg") center no-repeat;
+    background-size: 75%;
 }
