@@ -1,5 +1,15 @@
 (function() {
     let boardArr = Array(9).fill(null);
+    const winningArrays = [
+        [0,1,2],
+        [3,4,5],
+        [6,7,8],
+        [0,3,6],
+        [1,4,7],
+        [2,5,8],
+        [0,4,8],
+        [2,4,6]
+    ]
     // cache DOM
     const game = document.querySelector("#game");
     const cells = Array.from(game.querySelectorAll(".cell"));
@@ -8,11 +18,34 @@
     const gameBoard = {
         addMark: function(e) {
             let cell = Number(e.target.id);
+
+            if (boardArr[cell] !== null) {
+                return;
+            } else {
             boardArr[cell] = game.classList.value;
             displayControl.showMark(e.target);
+            }
         },
         checkWin: function() {
-            
+            for (let arr of winningArrays) {
+                const [a,b,c] = arr;
+                if (boardArr[a] == game.classList.value && boardArr[b] == game.classList.value && boardArr[c] == game.classList.value) {
+                    this.gameOver();
+                }
+            }
+            this.switchPlayers();
+        },
+        switchPlayers: function() {
+            if (game.classList.value == 'x') {
+                game.classList.remove('x');
+                game.classList.add('oh');
+            } else {
+                game.classList.remove('oh');
+                game.classList.add('x');
+            }
+        },
+        gameOver: function() {
+            console.log(game.classList.value + " wins!")
         }
     }
 
