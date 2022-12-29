@@ -5,7 +5,7 @@
     const cells = Array.from(game.querySelectorAll(".cell"));
     const players = game.querySelectorAll(".player");
     
-    const gameboard = {
+    const gameBoard = {
         addMark: function(e) {
             let cell = Number(e.target.id);
             boardArr[cell] = game.classList.value;
@@ -19,8 +19,8 @@
     const displayControl = {
         showMark: function(cell) {
             cell.classList.add(game.classList.value);
-            gameboard.checkWin();
+            gameBoard.checkWin();
         }
     }
-    cells.forEach(cell => cell.addEventListener("click", gameboard.addMark));
+    cells.forEach(cell => cell.addEventListener("click", gameBoard.addMark));
 })();
