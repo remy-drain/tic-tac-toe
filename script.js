@@ -38,9 +38,9 @@
         switchPlayers: function() {
             if (game.classList.value == 'x') {
                 game.classList.remove('x');
-                game.classList.add('oh');
+                game.classList.add('o');
             } else {
-                game.classList.remove('oh');
+                game.classList.remove('o');
                 game.classList.add('x');
             }
         },

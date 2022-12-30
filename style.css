@@ -35,7 +35,7 @@ body {
 }
 
 #game.x .player.x,
-#game.oh .player.oh {
+#game.o .player.o {
     background-color: rgb(var(--color));
     color: rgb(var(--bg));
     padding: .5em;
@@ -71,7 +71,8 @@ body {
     background: url("images/x-mark.svg") center no-repeat;
 }
 
-.cell.oh {
+.cell.o {
     background: url("images/o-mark.svg") center no-repeat;
     background-size: 75%;
 }
+
