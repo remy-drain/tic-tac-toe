@@ -76,3 +76,7 @@ body {
     background-size: 75%;
 }
 
+#game-over {
+    position: absolute;
+    display: none;
+}

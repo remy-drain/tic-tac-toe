@@ -1,5 +1,5 @@
 (function() {
-    let boardArr = Array(9).fill(null);
+    let boardArr = Array(9).fill('open');
     const winningArrays = [
         [0,1,2],
         [3,4,5],
@@ -14,12 +14,12 @@
     const game = document.querySelector("#game");
     const cells = Array.from(game.querySelectorAll(".cell"));
     const players = game.querySelectorAll(".player");
-    
+
     const gameBoard = {
         addMark: function(e) {
             let cell = Number(e.target.id);
 
-            if (boardArr[cell] !== null) {
+            if (boardArr[cell] !== 'open') {
                 return;
             } else {
             boardArr[cell] = game.classList.value;
@@ -33,7 +33,6 @@
                     this.gameOver();
                 }
             }
-            this.switchPlayers();
         },
         switchPlayers: function() {
             if (game.classList.value == 'x') {
