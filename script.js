@@ -16,6 +16,7 @@
     const players = game.querySelectorAll(".player");
     const endGame = game.querySelector("#game-over");
     const msg = endGame.querySelector("#message");
+    const playAgain = endGame.querySelector("#restart");
 
     const gameBoard = {
         addMark: function(e) {
@@ -32,10 +33,14 @@
             for (let arr of winningArrays) {
                 const [a,b,c] = arr;
                 if (boardArr[a] == game.classList.value && boardArr[b] == game.classList.value && boardArr[c] == game.classList.value) {
-                    this.gameOver();
+                    this.gameOver("win");
                 }
             }
-            this.switchPlayers();
+            if (boardArr.includes(null)) {
+                this.switchPlayers();
+            } else {
+                this.gameOver("draw");
+            }
         },
         switchPlayers: function() {
             if (game.classList.value == 'x') {
@@ -46,9 +51,22 @@
                 game.classList.add('x');
             }
         },
-        gameOver: function() {
-            msg.textContent = "Game Over";
+        gameOver: function(e) {
+            let endMessage;
+            if (e == "win") {
+                let winner = game.classList.value.toUpperCase();
+                endMessage = winner + " wins!";
+            } else if (e == "draw") {
+                endMessage = "It's a tie!";
+            }
+            msg.textContent = endMessage;
             endGame.classList.add("show");
+        },
+        restart: function() {
+            endGame.classList.remove("show");
+            boardArr = Array(9).fill(null);
+            displayControl.clearMarks();
+            game.className = 'x';
         }
     }
 
@@ -56,7 +74,12 @@
         showMark: function(cell) {
             cell.classList.add(game.classList.value);
             gameBoard.checkWin();
+        },
+        clearMarks: function() {
+            cells.forEach(cell => cell.className = 'cell');
         }
     }
     cells.forEach(cell => cell.addEventListener("click", gameBoard.addMark));
+
+    playAgain.addEventListener("click", gameBoard.restart);
 })();

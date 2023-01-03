@@ -81,7 +81,21 @@ body {
 #game-over {
     position: fixed;
     display: none;
+}
 
+#restart {
+    padding: .2em;
+    border: 1.5px solid rgb(var(--color));
+    background-color: rgb(var(--bg));
+    color: rgb(var(--color));
+    border-radius: 5px;
+    font-size: 2rem;
+}
+
+#restart:hover {
+    background-color: rgb(var(--color));
+    color: rgb(var(--bg));
+    cursor: pointer;
 }
 
 #game-over.show {
