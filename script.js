@@ -14,6 +14,8 @@
     const game = document.querySelector("#game");
     const cells = Array.from(game.querySelectorAll(".cell"));
     const players = game.querySelectorAll(".player");
+    const endGame = game.querySelector("#game-over");
+    const msg = endGame.querySelector("#message");
 
     const gameBoard = {
         addMark: function(e) {
@@ -33,7 +35,7 @@
                     this.gameOver();
                 }
             }
-            
+            this.switchPlayers();
         },
         switchPlayers: function() {
             if (game.classList.value == 'x') {
@@ -45,7 +47,8 @@
             }
         },
         gameOver: function() {
-            console.log(game.classList.value + " wins!")
+            msg.textContent = "Game Over";
+            endGame.classList.add("show");
         }
     }
 
