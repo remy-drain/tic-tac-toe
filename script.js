@@ -1,5 +1,5 @@
 (function() {
-    let boardArr = Array(9).fill('open');
+    let boardArr = Array(9).fill(null);
     const winningArrays = [
         [0,1,2],
         [3,4,5],
@@ -19,7 +19,7 @@
         addMark: function(e) {
             let cell = Number(e.target.id);
 
-            if (boardArr[cell] !== 'open') {
+            if (boardArr[cell] !== null) {
                 return;
             } else {
             boardArr[cell] = game.classList.value;
@@ -33,6 +33,7 @@
                     this.gameOver();
                 }
             }
+            
         },
         switchPlayers: function() {
             if (game.classList.value == 'x') {
