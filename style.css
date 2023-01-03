@@ -26,13 +26,29 @@ body {
     flex-direction: column;
 }
 
+#player-names {
+    flex-direction: column;
+    display: none;
+}
+
+#player-names input {
+    font-size: 2rem;
+    align-self: center;
+    outline: none;
+    background: transparent;
+    color: rgb(var(--color));
+    border: none;
+    border-bottom: 2px solid rgb(var(--color));
+}
+
 #players {
     display: flex;
     flex-direction: row;
     gap: 2em;
-    padding-bottom: 3em;
+    padding: 2em 0;
     font-size: 2.4em;
     align-items: center;
+
 }
 
 #game.x .player.x,
@@ -44,8 +60,8 @@ body {
 }
 
 #board {
-    width: clamp(350px, 90vw, 400px);
-    height: clamp(350px, 90vh, 400px);
+    width: clamp(350px, 90vw, 600px);
+    height: clamp(350px, 90vh, 600px);
     aspect-ratio: 1 / 1;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -79,11 +95,12 @@ body {
 }
 
 #game-over {
-    position: fixed;
     display: none;
+    flex-direction: column;
 }
 
-#restart {
+#restart,
+#start {
     padding: .2em;
     border: 1.5px solid rgb(var(--color));
     background-color: rgb(var(--bg));
@@ -92,15 +109,17 @@ body {
     font-size: 2rem;
 }
 
-#restart:hover {
+#restart:hover,
+#start:hover {
     background-color: rgb(var(--color));
     color: rgb(var(--bg));
     cursor: pointer;
 }
 
-#game-over.show {
+#game-over.show,
+#player-names.show {
     display: flex;
-    flex-direction: column;
+    position: fixed;
     justify-content: center;
     align-items: center;
     background-color: rgb(var(--bg), .9);
